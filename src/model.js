@@ -18,22 +18,21 @@ export class Human extends Model {
 // TODO: Human.init()
 Human.init(
   {
-    human_id: {
+    humanId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true
     },
     fname: {
-      type: DataTypes.VARCHAR(20),
+      type: DataTypes.STRING(20),
       allowNull: false
     },
     lname: {
-      type: DataTypes.VARCHAR(20),
+      type: DataTypes.STRING(20),
       allowNull: false
     },
     email: {
-      type: DataTypes.VARCHAR(35),
+      type: DataTypes.STRING(35),
       allowNull: false
     }
   },
@@ -52,21 +51,20 @@ export class Animal extends Model {
 // TODO: Animal.init()
 Animal.init(
   {
-    animal_id: {
+    animalId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      primaryKey: true
     },
     name: {
-      type: DataTypes.VARCHAR(20),
+      type: DataTypes.STRING(20),
       allowNull: false
     },
     species: {
-      type: DataTypes.VARCHAR(20),
+      type: DataTypes.STRING(20),
       allowNull: false
     },
-    birth_year: {
+    birthYear: {
       type: DataTypes.INTEGER
     }
   },
@@ -77,7 +75,8 @@ Animal.init(
 )
 
 // TODO: Define Relationship
-Human.hasMany(Animal, { foreignKey: 'human_id' })
-Animal.belongsTo(Human, { foreignKey: 'human_id' })
+Human.hasMany(Animal, { foreignKey: 'humanId' })
+Animal.belongsTo(Human, { foreignKey: 'humanId' })
 
+db.sync()
 export default db;
