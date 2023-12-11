@@ -23,7 +23,7 @@ console.log(query2)
 // Get all animals belonging to the human with primary key 5
 export const query3 = await Animal.findAll({
     where:
-    { humanId: '5'}
+    { human_id: '5'}
 })
 console.log(query3)
 
@@ -67,7 +67,46 @@ export const query8 = await Human.findAll({
 // Continue reading the instructions before you move on!
 
 // Print a directory of humans and their animals
-export async function printHumansAndAnimals() {}
+// export async function printHumansAndAnimals() {
+//     const humans = await Human.findAll({ include: Animal })
+
+// }
+export async function printHumansAndAnimals() {
+    try {
+      const humans = await Human.findAll({ include: Animal });
+      console.log(humans)
+      let list = []
+  
+      humans.forEach((human) => {
+        list.push(`${human.fname}`);
+        human.Animals.forEach((animal) => {
+            if (human.human_id === animal.human_id) {
+                list.push(`${animal.name}`);
+            }
+        });
+        console.log(list)
+        return list;
+      });
+    } catch (error) {
+      console.error('Error fetching humans and animals:', error);
+    }
+  }
+
+// export async function printHumansAndAnimals() {
+//       const humans = await Human.findAll({ include: Animal });
+//       console.log(humans)
+//       let list = []
+  
+//       humans.forEach((human) => {
+//         list.push(`${human.fname}`);
+//         human.Animals.forEach((animal) => {
+//           list.push(`${animal.name}`);
+//         });
+//       });
+//       return list;
+//   }
+
+printHumansAndAnimals();
 
 // Return a Set containing the full names of all humans
 // with animals of the given species.
